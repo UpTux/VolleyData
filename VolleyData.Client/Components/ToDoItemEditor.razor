@@ -1,0 +1,12 @@
+<MudDialog>
+    <DialogContent>
+        <MudForm @bind-IsValid="@_success">
+            <MudTextField @bind-Value="@_newTaskTitle" T="string" Label="Spieler Name" Required="true" RequiredError="Name erforderlich!"></MudTextField>
+            <MudTextField T="string" Label="Description" Variant="Variant.Text" @bind-value="@_newTaskDescription" Lines="5"/>
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="@Close">Cancel</MudButton>
+        <MudButton OnClick="@AddNewTask" Disabled="@(!_success)">Save</MudButton>
+    </DialogActions>
+</MudDialog>

@@ -1,0 +1,58 @@
+@*<MudCard Outlined="@Item.Status" Class="@_cssClass">
+    <MudCardContent>
+        <MudText>@Item.Title</MudText>
+        <MudText Class="fade" Typo="Typo.body2">@Item.Description</MudText>
+    </MudCardContent>
+    <MudCardActions Class="actions">
+        @if (!Item.Status)
+        {
+            <MudIconButton Color="Color.Secondary" Icon="@Icons.Material.Filled.Done" @onclick="@(e => UpdateTaskAsync())"></MudIconButton>
+        }
+        <MudIconButton Color="Color.Secondary" Icon="@Icons.Material.Filled.Delete" @onclick="@(e => DeleteTask())"></MudIconButton>
+    </MudCardActions>
+</MudCard>*@
+<MudTd DataLabel="Spieler">@Item.Title</MudTd>
+<MudTd DataLabel="AttackTotal">@Item.AttackTotal</MudTd>
+<MudTd>
+    <MudFab Color="Color.Info" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddAttackTotal())"/>
+</MudTd>
+<MudTd DataLabel="AttackTotal">@Item.AttackError</MudTd>
+<MudTd>
+    <MudFab Color="Color.Error" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddAttackError())"/>
+</MudTd>
+<MudTd DataLabel="AttackTotal">@Item.AttackBlock</MudTd>
+<MudTd>
+    <MudFab Color="Color.Warning" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddAttackBlock())"/>
+</MudTd>
+<MudTd DataLabel="AttackTotal">@Item.AttackKill</MudTd>
+<MudTd>
+    <MudFab Color="Color.Tertiary" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddAttackKill())"/>
+</MudTd>
+<MudTd DataLabel="AttackTotal">@Item.ReceiveTotal</MudTd>
+<MudTd>
+    <MudFab Color="Color.Info" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddReceiveTotal())"/>
+</MudTd>
+<MudTd DataLabel="AttackTotal">@Item.ReceiveError</MudTd>
+<MudTd>
+    <MudFab Color="Color.Error" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddReceiveError())"/>
+</MudTd>
+<MudTd DataLabel="AttackTotal">@Item.ReceivePositiv</MudTd>
+<MudTd>
+    <MudFab Color="Color.Warning" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddReceivePositiv())"/>
+</MudTd>
+<MudTd DataLabel="AttackTotal">@Item.ReceiveExcellent</MudTd>
+<MudTd>
+    <MudFab Color="Color.Tertiary" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddReceiveExcellent())"/>
+</MudTd>
+<MudTd DataLabel="AttackTotal">@Item.ServeTotal</MudTd>
+<MudTd>
+    <MudFab Color="Color.Info" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddServeTotal())"/>
+</MudTd>
+<MudTd DataLabel="AttackTotal">@Item.ServeError</MudTd>
+<MudTd>
+    <MudFab Color="Color.Error" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddServeError())"/>
+</MudTd>
+<MudTd DataLabel="AttackTotal">@Item.ServeKill</MudTd>
+<MudTd>
+    <MudFab Color="Color.Tertiary" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddServeKill())"/>
+</MudTd>

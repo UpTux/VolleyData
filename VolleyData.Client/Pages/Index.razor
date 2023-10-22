@@ -1,0 +1,138 @@
+@page "/"
+
+<style type="text/css">
+    .mud-table-head .header-centered th {
+        text-align: center;
+        font-size: 1.2em;
+    }
+
+    .mud-table-foot .bold-text .mud-table-cell {
+        font-weight: 500;
+    }
+
+    .mud-table-cell {
+        padding: 2px 16px; /* vertical, horizontal */
+    }
+
+    .cards {
+        display: flex;
+        flex-flow: wrap;
+        gap: 1rem;
+    }
+
+    .details {
+        display: flex;
+        flex-flow: wrap;
+        gap: 1rem;
+    }
+</style>
+
+@if (_toDoItems != null && _toDoItems.Any())
+{
+    <div class="todos">
+        <MudTable Items="@_toDoItems" Striped="true" Bordered="true" CustomHeader="true" CustomFooter="true" HeaderClass="table-head-bordered" FooterClass="table-foot-bordered">
+            <HeaderContent>
+                <MudTHeadRow IgnoreCheckbox="true" Class="header-centered">
+                    <MudTh colspan="23">Statistik</MudTh>
+                </MudTHeadRow>
+                <MudTHeadRow Class="header-centered">
+                    <MudTh></MudTh>
+                    <MudTh colspan="8">Angriff</MudTh>
+                    <MudTh colspan="8">Annahme</MudTh>
+                    <MudTh colspan="6">Aufschlag</MudTh>
+                </MudTHeadRow>
+                <MudTHeadRow>
+                    <MudTh>Spieler</MudTh>
+                    <MudTh colspan="2">Total</MudTh>
+                    <MudTh colspan="2">Error</MudTh>
+                    <MudTh colspan="2">Block</MudTh>
+                    <MudTh colspan="2">Kill</MudTh>
+                    <MudTh colspan="2">Total</MudTh>
+                    <MudTh colspan="2">Error</MudTh>
+                    <MudTh colspan="2">Pos</MudTh>
+                    <MudTh colspan="2">Excellent</MudTh>
+                    <MudTh colspan="2">Total</MudTh>
+                    <MudTh colspan="2">Error</MudTh>
+                    <MudTh colspan="2">Punkt</MudTh>
+                </MudTHeadRow>
+            </HeaderContent>
+            <RowTemplate>
+                <ToDoItem @key="@context.Id" Item="@context" ToDoItemChanged="@RefreshAsync"></ToDoItem>
+            </RowTemplate>
+            @*@foreach (var task in _toDoItems)
+        {
+        <ToDoItem @key="task.Id" Item="@task" ToDoItemChanged="@RefreshAsync"></ToDoItem>
+
+        }*@
+        </MudTable>
+        <MudSpacer />
+    </div>
+
+    <div class="details">
+        <MudExpansionPanels Style="flex:1">
+            <MudExpansionPanel Text="Details anzeigen">
+                <MudDataGrid Items="@_toDoItems" Filterable="false"
+                             SortMode="@SortMode.None" Groupable="false" ReadOnly="@_readOnly"
+                             EditMode="@(DataGridEditMode.Form)"
+                             EditTrigger="@(_editTriggerRowClick ? DataGridEditTrigger.OnRowClick : DataGridEditTrigger.Manual)">
+                    <Columns>
+                        <PropertyColumn Property="x => x.Title" IsEditable="false">Anzahl Actions</PropertyColumn>
+                        <PropertyColumn Property="x => x.ActionsTotal" IsEditable="false">Anzahl Actions</PropertyColumn>
+                        <PropertyColumn Property="x => x.ActionsError" IsEditable="false">Anzahl Fehler</PropertyColumn>
+                        <PropertyColumn Property="x => x.ErrorPercentage" IsEditable="false">% Fehler</PropertyColumn>
+                        @*<PropertyColumn Property="x => x.AttackTotal"></PropertyColumn>
+                    <PropertyColumn Property="x => x.AttackError"></PropertyColumn>
+                    <PropertyColumn Property="x => x.AttackBlock"></PropertyColumn>
+                    <PropertyColumn Property="x => x.AttackKill">Punkte</PropertyColumn>
+                    <PropertyColumn Property="x => x.ReceiveTotal"></PropertyColumn>
+                    <PropertyColumn Property="x => x.ReceiveError"></PropertyColumn>
+                    <PropertyColumn Property="x => x.ReceivePositiv"></PropertyColumn>
+                    <PropertyColumn Property="x => x.ReceiveExcellent"></PropertyColumn>
+                    <PropertyColumn Property="x => x.ServeTotal">Anzahl Aufschläge</PropertyColumn>
+                    <PropertyColumn Property="x => x.ServeError">Aufschlag-Fehler</PropertyColumn>
+                    <PropertyColumn Property="x => x.ServeKill">Asse</PropertyColumn>*@
+                        <TemplateColumn Hidden="@(_readOnly || _editTriggerRowClick)" CellClass="d-flex justify-end">
+                            <CellTemplate>
+                                <MudIconButton Size="@Size.Small" Icon="@Icons.Material.Outlined.Edit" OnClick="@StartEditingItemAsync" />
+                            </CellTemplate>
+                        </TemplateColumn>
+                    </Columns>
+                </MudDataGrid>
+                <div class="d-flex flex-wrap mt-4">
+                    <MudSwitch @bind-Checked="@_readOnly" Color="Color.Primary">Read Only</MudSwitch>
+                    @*<div class="d-flex justify-start align-center">
+                <p class="mud-typography mud-typography-body1 mud-inherit-text mr-2">Form</p>
+                <MudSwitch @bind-Checked="@_isCellEditMode">Cell</MudSwitch>
+                </div>
+                <div class="d-flex justify-start align-center">
+                <p class="mud-typography mud-typography-body1 mud-inherit-text mr-2">Manual</p>
+                <MudSwitch @bind-Checked="@_editTriggerRowClick">On Row Click</MudSwitch>
+                </div>*@
+                </div>
+            </MudExpansionPanel>
+
+            <MudExpansionPanel Text="Events" Disabled="true">
+                <div class="d-flex flex-wrap mt-4">
+                    @foreach (var message in _events)
+                    {
+                        <MudText Typo="@Typo.body2">@message</MudText>
+                    }
+                    @if (_events.Count > 0)
+                    {
+                        <div class="d-flex">
+                            <MudSpacer />
+                            <MudButton Class="mt-3" ButtonType="ButtonType.Button" Variant="Variant.Filled" OnClick="@(() => _events.Clear())">Clear</MudButton>
+                        </div>
+                    }
+                </div>
+            </MudExpansionPanel>
+        </MudExpansionPanels>
+    </div>
+}
+else
+{
+    <p class="info">Es sind derzeit keine Spieler hinzugefügt.</p>
+}
+<div class="btn-add">
+    <MudButton Color="Color.Primary" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" OnClick="@OpenDialog">Spieler hinzufügen</MudButton>
+</div>

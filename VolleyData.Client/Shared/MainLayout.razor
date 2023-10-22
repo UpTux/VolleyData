@@ -1,0 +1,34 @@
+@inherits LayoutComponentBase
+
+<MudThemeProvider Theme="_currentTheme"/>
+<MudDialogProvider FullWidth="true"
+                   MaxWidth="MaxWidth.Large"
+                   CloseButton="true"
+                   DisableBackdropClick="true"
+                   Position="DialogPosition.Center"/>
+<MudSnackbarProvider/>
+<MudLayout>
+    <MudAppBar Elevation="1" Color="Color.Success">
+        <MudText Typo="Typo.h5">Volleyball Data & Statistik</MudText>
+        <MudSpacer/>
+        <MudSpacer />
+        <!-- Clear -->
+        
+        <MudSwitch @bind-Checked="@_isClearAllEnabled" Color="Color.Primary">Alle Löschen</MudSwitch>
+            
+        <MudButton Color="Color.Primary" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ClearAll" OnClick="@ClearAllAsync" Disabled="@(!_isClearAllEnabled)" >Clear</MudButton>
+        <MudSpacer />
+        <!-- Reset -->
+        <MudSwitch @bind-Checked="@_isResetEnabled" Color="Color.Primary">Reset</MudSwitch>
+<MudButton Color="Color.Primary" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Restore" OnClick="@ResetAllAsync" Disabled="@(!_isResetEnabled)">Reset</MudButton>
+        <!--Undo-->
+        <MudButton Color="Color.Primary" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Undo" OnClick="@UndoAsync" Disabled="@(!_canUndo)">Undo</MudButton>
+        <MudSpacer/>
+        <MudText>@_time</MudText>
+    </MudAppBar>
+    <MudMainContent Class="pt-16 px-16">
+        <MudContainer Class="mt-6">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
