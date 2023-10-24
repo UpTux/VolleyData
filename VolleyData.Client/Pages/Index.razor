@@ -70,27 +70,22 @@
 
     <div class="details">
         <MudExpansionPanels Style="flex:1">
-            <MudExpansionPanel Text="Details anzeigen">
+            <MudExpansionPanel Text="Details Spieler">
                 <MudDataGrid Items="@_toDoItems" Filterable="false"
                              SortMode="@SortMode.None" Groupable="false" ReadOnly="@_readOnly"
                              EditMode="@(DataGridEditMode.Form)"
                              EditTrigger="@(_editTriggerRowClick ? DataGridEditTrigger.OnRowClick : DataGridEditTrigger.Manual)">
                     <Columns>
-                        <PropertyColumn Property="x => x.Title" IsEditable="false">Anzahl Actions</PropertyColumn>
-                        <PropertyColumn Property="x => x.ActionsTotal" IsEditable="false">Anzahl Actions</PropertyColumn>
-                        <PropertyColumn Property="x => x.ActionsError" IsEditable="false">Anzahl Fehler</PropertyColumn>
-                        <PropertyColumn Property="x => x.ErrorPercentage" IsEditable="false">% Fehler</PropertyColumn>
-                        @*<PropertyColumn Property="x => x.AttackTotal"></PropertyColumn>
-                    <PropertyColumn Property="x => x.AttackError"></PropertyColumn>
-                    <PropertyColumn Property="x => x.AttackBlock"></PropertyColumn>
-                    <PropertyColumn Property="x => x.AttackKill">Punkte</PropertyColumn>
-                    <PropertyColumn Property="x => x.ReceiveTotal"></PropertyColumn>
-                    <PropertyColumn Property="x => x.ReceiveError"></PropertyColumn>
-                    <PropertyColumn Property="x => x.ReceivePositiv"></PropertyColumn>
-                    <PropertyColumn Property="x => x.ReceiveExcellent"></PropertyColumn>
-                    <PropertyColumn Property="x => x.ServeTotal">Anzahl Aufschläge</PropertyColumn>
-                    <PropertyColumn Property="x => x.ServeError">Aufschlag-Fehler</PropertyColumn>
-                    <PropertyColumn Property="x => x.ServeKill">Asse</PropertyColumn>*@
+                        <PropertyColumn Property="x => x.Title" IsEditable="false" Title="Name">Anzahl Actions</PropertyColumn>
+                        <PropertyColumn Property="x => x.ActionsTotal" IsEditable="false" Title="Aktionen">Anzahl Actions</PropertyColumn>
+                        <PropertyColumn Property="x => x.ActionsError" IsEditable="false" Title="Fehler Total">Anzahl Fehler</PropertyColumn>
+                        <PropertyColumn Property="x => x.ErrorPercentagePrittyPrint" IsEditable="false" Title="Fehlerquote">% Fehler</PropertyColumn>
+                        <PropertyColumn Property="x => x.PercentageReceiveError" IsEditable="false" Title="Annahmefehler %"/>
+                        <PropertyColumn Property="x => x.PercentageReceivePositiv" IsEditable="false" Title="% Annahme +" />
+                        <PropertyColumn Property="x => x.PercentageReceiveExcellent" IsEditable="false" Title="% Annahme ++"></PropertyColumn>
+                        <PropertyColumn Property="x => x.PercentageAttackError" IsEditable="false" Title="% Angriff Fehler"/>
+                        <PropertyColumn Property="x => x.PersentageAttackKill" IsEditable="false" Title="% Angriff Punkt"/>
+                        
                         <TemplateColumn Hidden="@(_readOnly || _editTriggerRowClick)" CellClass="d-flex justify-end">
                             <CellTemplate>
                                 <MudIconButton Size="@Size.Small" Icon="@Icons.Material.Outlined.Edit" OnClick="@StartEditingItemAsync" />
@@ -109,6 +104,17 @@
                 <MudSwitch @bind-Checked="@_editTriggerRowClick">On Row Click</MudSwitch>
                 </div>*@
                 </div>
+            </MudExpansionPanel>
+            
+            <MudSpacer/>
+            <MudExpansionPanel Text="Details Mannschaft">
+                <MudList Clickable="false">
+                    @foreach (var s in _summary)
+                    {
+                        <MudListItem Text="@s.Message"></MudListItem>
+                    }
+                </MudList>
+
             </MudExpansionPanel>
 
             <MudExpansionPanel Text="Events" Disabled="true">

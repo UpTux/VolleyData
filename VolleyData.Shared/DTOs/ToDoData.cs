@@ -50,6 +50,12 @@ namespace VolleyData.Shared.DTOs
             get;
             set;
         }
+        public double ErrorPercentagePrittyPrint => Math.Round(ErrorPercentage, 2);
+        public double PercentageReceiveError => Math.Round((double)ReceiveError / (double)ReceiveTotal * 100, 2);
+        public double PercentageReceivePositiv => Math.Round((double)ReceivePositiv / (double)ReceiveTotal * 100, 2);
+        public double PercentageReceiveExcellent => Math.Round((double)ReceiveExcellent / (double)ReceiveTotal * 100, 2);
+        public double PercentageAttackError => Math.Round((double)AttackError / (double)AttackTotal * 100, 2);
+        public double PersentageAttackKill => Math.Round((double)AttackKill / (double)AttackTotal * 100, 2);
 
     }
 }

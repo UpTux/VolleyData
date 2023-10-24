@@ -12,6 +12,8 @@ namespace VolleyData.Client.Components
 
         [Parameter] public EventCallback<bool> ToDoItemChanged { get; set; }
 
+        
+
         private string _cssClass = "item";
 
         protected override void OnInitialized()

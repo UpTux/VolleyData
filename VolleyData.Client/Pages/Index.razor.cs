@@ -13,12 +13,14 @@ namespace VolleyData.Client.Pages
 
         private List<ToDoData> _toDoItems = new();
         private List<Summary> _summary = new();
+        
         private bool _readOnly;
         private List<string> _events = new();
         private bool _editTriggerRowClick;
         protected override async Task OnInitializedAsync()
         {
-            await LoadTodosFromServerAsync();
+            base.OnInitializedAsync();
+            await RefreshAsync();
         }
 
         private async Task OpenDialog()
@@ -57,7 +59,7 @@ namespace VolleyData.Client.Pages
                         totalKills += item.AttackKill;
                     }
 
-                    killPercentage = (double) totalKills / (double) totalAttacks * 100;
+                    killPercentage = Math.Round((double)totalKills / (double)totalAttacks * 100, 2);
                     _summary.Add(new Summary
                     {
                         Title = "Fehler",
