@@ -3,6 +3,7 @@ using MudBlazor;
 using VolleyData.Client.Components;
 using VolleyData.Client.Services;
 using VolleyData.Shared.DTOs;
+using static MudBlazor.CategoryTypes;
 
 namespace VolleyData.Client.Pages
 {
@@ -128,5 +129,18 @@ namespace VolleyData.Client.Pages
         {
 
         }
+
+        /*private string RowStyleFunc(ToDoItem arg1, int index)
+        {
+            switch (arg1.Item.)
+            {
+                case string a when a.Contains("1/4"):
+                    return "background-color:blue";
+                case string b when b.Contains("2/4"):
+                    return "background-color:red";
+                default: return "background-color:white";
+
+            }
+        }*/
     }
 }

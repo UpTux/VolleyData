@@ -10,5 +10,8 @@
     right: 2rem;
 }
 
+::deep .mud-table {
+    height: 100%
+}
 
 

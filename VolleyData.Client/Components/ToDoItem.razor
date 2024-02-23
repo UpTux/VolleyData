@@ -11,7 +11,7 @@
         <MudIconButton Color="Color.Secondary" Icon="@Icons.Material.Filled.Delete" @onclick="@(e => DeleteTask())"></MudIconButton>
     </MudCardActions>
 </MudCard>*@
-<MudTd DataLabel="Spieler">@Item.Title</MudTd>
+<MudTd DataLabel="Spieler" Class="thick-right-border">@Item.Title</MudTd>
 <MudTd DataLabel="AttackTotal">@Item.AttackTotal</MudTd>
 <MudTd>
     <MudFab Color="Color.Info" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddAttackTotal())"/>
@@ -56,3 +56,4 @@
 <MudTd>
     <MudFab Color="Color.Tertiary" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddServeKill())"/>
 </MudTd>
+<MudTd DataLabel="Spieler">@Item.Title</MudTd>

@@ -4,6 +4,7 @@
     .mud-table-head .header-centered th {
         text-align: center;
         font-size: 1.2em;
+        margin: 2px;
     }
 
     .mud-table-foot .bold-text .mud-table-cell {
@@ -12,6 +13,10 @@
 
     .mud-table-cell {
         padding: 2px 16px; /* vertical, horizontal */
+    }
+
+    td.mud-table-cell .thick-right-border{
+        border-right: 2px solid black;
     }
 
     .cards {
@@ -30,7 +35,15 @@
 @if (_toDoItems != null && _toDoItems.Any())
 {
     <div class="todos">
-        <MudTable Items="@_toDoItems" Striped="true" Bordered="true" CustomHeader="true" CustomFooter="true" HeaderClass="table-head-bordered" FooterClass="table-foot-bordered">
+        <MudTable Items="@_toDoItems" 
+                  Striped="true" 
+                  Bordered="true" 
+                  CustomHeader="true"
+                  CustomFooter="true" 
+                  HeaderClass="table-head-bordered" 
+                  FooterClass="table-foot-bordered" 
+                  Hover="true" 
+                  >
             <HeaderContent>
                 <MudTHeadRow IgnoreCheckbox="true" Class="header-centered">
                     <MudTh colspan="24">Statistik</MudTh>
