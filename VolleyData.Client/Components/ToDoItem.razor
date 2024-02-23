@@ -12,7 +12,7 @@
     </MudCardActions>
 </MudCard>*@
 <MudTd DataLabel="Spieler" Class="thick-right-border">@Item.Title</MudTd>
-<MudTd DataLabel="AttackTotal">@Item.AttackTotal</MudTd>
+<MudTd DataLabel="AttackTotal" Style="border-left: 2px solid black">@Item.AttackTotal</MudTd>
 <MudTd>
     <MudFab Color="Color.Info" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddAttackTotal())"/>
 </MudTd>
@@ -24,11 +24,11 @@
 <MudTd>
     <MudFab Color="Color.Warning" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddAttackBlock())"/>
 </MudTd>
-<MudTd DataLabel="AttackTotal">@Item.AttackKill</MudTd>
+<MudTd DataLabel="AttackTotal" >@Item.AttackKill</MudTd>
 <MudTd>
-    <MudFab Color="Color.Tertiary" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddAttackKill())"/>
+    <MudFab Color="Color.Tertiary"  Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddAttackKill())" />
 </MudTd>
-<MudTd DataLabel="AttackTotal">@Item.ReceiveTotal</MudTd>
+<MudTd DataLabel="AttackTotal" Style="border-left: 2px solid black">@Item.ReceiveTotal</MudTd>
 <MudTd>
     <MudFab Color="Color.Info" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddReceiveTotal())"/>
 </MudTd>
@@ -40,11 +40,11 @@
 <MudTd>
     <MudFab Color="Color.Warning" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddReceivePositiv())"/>
 </MudTd>
-<MudTd DataLabel="AttackTotal">@Item.ReceiveExcellent</MudTd>
+<MudTd DataLabel="AttackTotal" >@Item.ReceiveExcellent</MudTd>
 <MudTd>
     <MudFab Color="Color.Tertiary" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddReceiveExcellent())"/>
 </MudTd>
-<MudTd DataLabel="AttackTotal">@Item.ServeTotal</MudTd>
+<MudTd DataLabel="AttackTotal" Style="border-left: 2px solid black">@Item.ServeTotal</MudTd>
 <MudTd>
     <MudFab Color="Color.Info" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddServeTotal())"/>
 </MudTd>
@@ -56,4 +56,4 @@
 <MudTd>
     <MudFab Color="Color.Tertiary" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddServeKill())"/>
 </MudTd>
-<MudTd DataLabel="Spieler">@Item.Title</MudTd>
+<MudTd DataLabel="Spieler" Style="border-left: 2px solid black">@Item.Title</MudTd>
