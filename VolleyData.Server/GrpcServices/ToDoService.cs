@@ -8,10 +8,12 @@ namespace VolleyData.Server.GrpcServices
     public class ToDoService : IToDoService
     {
         private readonly ToDoDbContext _dataContext;
+        private Stack<ToDoData> _undoStack;
 
         public ToDoService(ToDoDbContext dataContext)
         {
             _dataContext = dataContext;
+            _undoStack = new Stack<ToDoData>();
         }
 
         public Task<ToDoRequestResponse> AddToDoItemAsync(ToDoData data)
@@ -49,6 +51,8 @@ namespace VolleyData.Server.GrpcServices
                     StatusMessage = "Item not found."
                 };
             }
+
+            
 
             item.Title = data.Title;
             item.Description = data.Description;
@@ -111,6 +115,7 @@ namespace VolleyData.Server.GrpcServices
             var result = _dataContext.SaveChanges();
             if (result > 0)
             {
+                _undoStack.Clear();
                 return Task.FromResult(new ToDoRequestResponse()
                 {
                     Status = true,
@@ -165,7 +170,62 @@ namespace VolleyData.Server.GrpcServices
                 StatusMessage = "Issue Occured."
             });
         }
-        
+
+        public Task<ToDoRequestResponse> UndoAsync()
+        {
+            
+            _undoStack.TryPop(out var item);
+
+            if (item == null)
+            {
+                return Task.FromResult(new ToDoRequestResponse()
+                {
+                    Status = false,
+                    StatusCode = 404,
+                    StatusMessage = "Undo not possible"
+                });
+            }
+            
+            var itemToUpdate = _dataContext.ToDoDbItems
+                .Single(toDoData => toDoData.Id == item.Id);
+
+            itemToUpdate.Title = item.Title;
+            itemToUpdate.Description = item.Description;
+            itemToUpdate.Status = item.Status;
+            itemToUpdate.AttackTotal = item.AttackTotal;
+            itemToUpdate.AttackError = item.AttackError;
+            itemToUpdate.AttackBlock = item.AttackBlock;
+            itemToUpdate.AttackKill = item.AttackKill;
+            itemToUpdate.ReceiveTotal = item.ReceiveTotal;
+            itemToUpdate.ReceiveError = item.ReceiveError;
+            itemToUpdate.ReceivePositiv = item.ReceivePositiv;
+            itemToUpdate.ReceiveExcellent = item.ReceiveExcellent;
+            itemToUpdate.ServeTotal = item.ServeTotal;
+            itemToUpdate.ServeError = item.ServeError;
+            itemToUpdate.ServeKill = item.ServeKill;
+            itemToUpdate.ActionsTotal = item.ActionsTotal;
+            itemToUpdate.ActionsError = item.ActionsError;
+            itemToUpdate.ErrorPercentage = item.ErrorPercentage;
+
+            var result = _dataContext.SaveChanges();
+            if (result > 0)
+            {
+                return Task.FromResult(new ToDoRequestResponse()
+                {
+                    Status = true,
+                    StatusCode = 100,
+                    StatusMessage = "Undo Successfully"
+                });
+            }
+            return Task.FromResult(new ToDoRequestResponse()
+            {
+                Status = false,
+                StatusCode = 500,
+                StatusMessage = "Issue Occured."
+            });
+
+        }
+
 
         public async Task<List<ToDoData>> GetToDosAsync()
         {

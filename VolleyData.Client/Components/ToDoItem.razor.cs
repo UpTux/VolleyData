@@ -41,12 +41,14 @@ namespace VolleyData.Client.Components
 
         private async Task AddAttackTotal()
         {
+            ToDoService.BackupItem(Item.Clone());
             Item.AttackTotal++;
             await UpdateTaskAsync();
         }
 
         private async Task AddAttackError()
         {
+            ToDoService.BackupItem(Item.Clone());
             Item.AttackError++;
             Item.AttackTotal++;
             await UpdateTaskAsync();
@@ -54,6 +56,7 @@ namespace VolleyData.Client.Components
 
         private async Task AddAttackBlock()
         {
+            ToDoService.BackupItem(Item.Clone());
             Item.AttackBlock++;
             Item.AttackTotal++;
             await UpdateTaskAsync();
@@ -61,6 +64,7 @@ namespace VolleyData.Client.Components
 
         private async Task AddAttackKill()
         {
+            ToDoService.BackupItem(Item.Clone());
             Item.AttackKill++;
             Item.AttackTotal++;
             await UpdateTaskAsync();
@@ -68,12 +72,14 @@ namespace VolleyData.Client.Components
 
         private async Task AddReceiveTotal()
         {
+            ToDoService.BackupItem(Item.Clone());
             Item.ReceiveTotal++;
             await UpdateTaskAsync();
         }
 
         private async Task AddReceiveError()
         {
+            ToDoService.BackupItem(Item.Clone());
             Item.ReceiveError++;
             Item.ReceiveTotal++;
             await UpdateTaskAsync();
@@ -81,6 +87,7 @@ namespace VolleyData.Client.Components
 
         private async Task AddReceivePositiv()
         {
+            ToDoService.BackupItem(Item.Clone());
             Item.ReceivePositiv++;
             Item.ReceiveTotal++;
             await UpdateTaskAsync();
@@ -88,6 +95,7 @@ namespace VolleyData.Client.Components
 
         private async Task AddReceiveExcellent()
         {
+            ToDoService.BackupItem(Item.Clone());
             Item.ReceiveExcellent++;
             Item.ReceiveTotal++;
             await UpdateTaskAsync();
@@ -95,12 +103,14 @@ namespace VolleyData.Client.Components
 
         private async Task AddServeTotal()
         {
+            ToDoService.BackupItem(Item.Clone());
             Item.ServeTotal++;
             await UpdateTaskAsync();
         }
 
         private async Task AddServeError()
         {
+            ToDoService.BackupItem(Item.Clone());
             Item.ServeError++;
             Item.ServeTotal++;
             await UpdateTaskAsync();
@@ -108,6 +118,7 @@ namespace VolleyData.Client.Components
 
         private async Task AddServeKill()
         {
+            ToDoService.BackupItem(Item.Clone());
             Item.ServeKill++;
             Item.ServeTotal++;
             await UpdateTaskAsync();

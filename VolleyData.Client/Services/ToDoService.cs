@@ -1,16 +1,22 @@
 ﻿using VolleyData.Shared.DTOs;
 using VolleyData.Shared.Services;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using Index = VolleyData.Client.Pages.Index;
 
 namespace VolleyData.Client.Services
 {
     public class ToDoService
     {
         private readonly IToDoService _toDoService;
+        private Stack<ToDoData> _undoStack;
 
         public ToDoService(IToDoService todoService)
         {
             _toDoService = todoService;
+            _undoStack = new Stack<ToDoData>();
         }
+
+        public Index Index { get; set; }
 
         public Task AddToDoData(ToDoData data)
         {
@@ -40,6 +46,25 @@ namespace VolleyData.Client.Services
         public async Task ResetAllAsync()
         {
             await _toDoService.ResetAllAsync();
+        }
+
+        public async Task UndoAsync()
+        {
+            var hasItem = _undoStack.TryPop(out ToDoData? data);
+
+            if (hasItem)
+            {
+                await _toDoService.UpdateToDoItemAsync(data);
+                await Task.Delay(100);
+                await Index.RefreshAsync();
+                
+            }
+            
+        }
+
+        public void BackupItem(ToDoData clone)
+        {
+            _undoStack.Push(clone);
         }
     }
 }

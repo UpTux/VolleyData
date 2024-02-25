@@ -2,6 +2,7 @@ using Grpc.Core;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using ProtoBuf.Grpc;
+using VolleyData.Client.Services;
 using VolleyData.Shared.Services;
 
 namespace VolleyData.Client.Shared
@@ -12,9 +13,10 @@ namespace VolleyData.Client.Shared
         [Inject] private IDialogService DialogService { get; set; } = default!;
 
         [Inject] private IToDoService ToDoService { get; set; } = default!;
+        [Inject] private ToDoService tdService { get; set; } = default!;
 
         private string _time = "";
-        private bool _canUndo = false;
+        private bool _canUndo = true;
         private bool _isClearAllEnabled = false;
         private bool _isResetEnabled = false;
         private CancellationTokenSource _cts;
@@ -77,18 +79,26 @@ namespace VolleyData.Client.Shared
 
         private async Task UndoAsync()
         {
+            await tdService.UndoAsync();
+            StateHasChanged();
 
+            //NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
+            //StateHasChanged();
         }
 
         private async Task ClearAllAsync()
         {
             await ToDoService.ClearAllAsync();
             StateHasChanged();
+            NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
+            StateHasChanged();
         }
 
         private async Task ResetAllAsync()
         {
             await ToDoService.ResetAllAsync();
+            StateHasChanged();
+            NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
             StateHasChanged();
         }
     }

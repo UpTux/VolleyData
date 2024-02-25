@@ -57,5 +57,29 @@ namespace VolleyData.Shared.DTOs
         public double PercentageAttackError => Math.Round((double)AttackError / (double)AttackTotal * 100, 2);
         public double PersentageAttackKill => Math.Round((double)AttackKill / (double)AttackTotal * 100, 2);
 
+        public ToDoData Clone()
+        {
+            return new ToDoData()
+            {
+                Id = this.Id,
+                Title = this.Title,
+                Description = this.Description,
+                Status = this.Status,
+                AttackTotal = this.AttackTotal,
+                AttackError = this.AttackError,
+                AttackBlock = this.AttackBlock,
+                AttackKill = this.AttackKill,
+                ReceiveTotal = this.ReceiveTotal,
+                ReceiveError = this.ReceiveError,
+                ReceivePositiv = this.ReceivePositiv,
+                ReceiveExcellent = this.ReceiveExcellent,
+                ServeTotal = this.ServeTotal,
+                ServeError = this.ServeError,
+                ServeKill = this.ServeKill,
+                ActionsTotal = this.ActionsTotal,
+                ActionsError = this.ActionsError,
+                ErrorPercentage = this.ErrorPercentage
+            };
+        }
     }
 }

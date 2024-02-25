@@ -21,6 +21,7 @@ namespace VolleyData.Client.Pages
         protected override async Task OnInitializedAsync()
         {
             base.OnInitializedAsync();
+            ToDoService.Index = this;
             await RefreshAsync();
         }
 
@@ -34,10 +35,11 @@ namespace VolleyData.Client.Pages
             }
         }
 
-        private async Task RefreshAsync()
+        public async Task RefreshAsync()
         {
             await LoadTodosFromServerAsync();
             await CalculateSummary();
+            StateHasChanged();
         }
 
         private async Task CalculateSummary()
@@ -104,6 +106,7 @@ namespace VolleyData.Client.Pages
                 Console.WriteLine("Failed to load todo list.");
                 _toDoItems = new List<ToDoData>();
             }
+            StateHasChanged();
         }
 
         // events

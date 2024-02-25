@@ -22,5 +22,8 @@ namespace VolleyData.Shared.Services
 
         [OperationContract]
         Task<ToDoRequestResponse> ResetAllAsync();
+
+        [OperationContract]
+        Task<ToDoRequestResponse> UndoAsync();
     }
 }
