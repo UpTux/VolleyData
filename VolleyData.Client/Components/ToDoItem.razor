@@ -12,7 +12,7 @@
     </MudCardActions>
 </MudCard>*@
 <MudTd DataLabel="Spieler" Class="thick-right-border">@Item.Title</MudTd>
-<MudTd DataLabel="AttackTotal" Style="border-left: 2px solid black">@Item.AttackTotal</MudTd>
+<MudTd DataLabel="AttackTotal" Class="border-l-2">@Item.AttackTotal</MudTd>
 <MudTd>
     <MudFab Color="Color.Info" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddAttackTotal())"/>
 </MudTd>
@@ -28,7 +28,7 @@
 <MudTd>
     <MudFab Color="Color.Tertiary"  Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddAttackKill())" />
 </MudTd>
-<MudTd DataLabel="AttackTotal" Style="border-left: 2px solid black">@Item.ReceiveTotal</MudTd>
+<MudTd DataLabel="AttackTotal" Class="border-l-2">@Item.ReceiveTotal</MudTd>
 <MudTd>
     <MudFab Color="Color.Info" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddReceiveTotal())"/>
 </MudTd>
@@ -44,7 +44,7 @@
 <MudTd>
     <MudFab Color="Color.Tertiary" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddReceiveExcellent())"/>
 </MudTd>
-<MudTd DataLabel="AttackTotal" Style="border-left: 2px solid black">@Item.ServeTotal</MudTd>
+<MudTd DataLabel="AttackTotal" Class="border-l-2">@Item.ServeTotal</MudTd>
 <MudTd>
     <MudFab Color="Color.Info" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddServeTotal())"/>
 </MudTd>
@@ -56,4 +56,4 @@
 <MudTd>
     <MudFab Color="Color.Tertiary" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" @onclick="@(e => AddServeKill())"/>
 </MudTd>
-<MudTd DataLabel="Spieler" Style="border-left: 2px solid black">@Item.Title</MudTd>
+<MudTd DataLabel="Spieler" Class="border-l-2">@Item.Title</MudTd>
